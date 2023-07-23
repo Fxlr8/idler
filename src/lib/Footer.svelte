@@ -7,7 +7,9 @@
   import clickOutside from './utils/clickOutside'
   import { fly } from 'svelte/transition'
 
-  let menuOpen = true
+  import { theme } from '../stores'
+
+  let menuOpen = false
 
   const toggleMenu = () => {
     menuOpen = !menuOpen
@@ -65,42 +67,48 @@
         <div class="flex gap-x-5 justify-center">
           <button
             class="rounded-full dark:bg-[#565656] bg-black dark:bg-opacity-50 w-25 h-25 flex items-center justify-center p-0 border-0"
-            class:text-white={enabled}
-            class:bg-opacity-50={enabled}
-            class:bg-opacity-10={!enabled}
-            class:dark:text-black={enabled}
-            class:dark:bg-white={enabled}
-            on:click={toggleEnabled}
+            class:text-white={$theme === 'light'}
+            class:bg-opacity-50={$theme === 'light'}
+            class:bg-opacity-10={$theme !== 'light'}
+            class:dark:text-black={$theme === 'light'}
+            class:dark:bg-white={$theme === 'light'}
+            on:click={() => theme.set('light')}
           >
-            <div class:opacity-100={enabled} class:opacity-40={!enabled}>
+            <div
+              class:opacity-100={$theme === 'light'}
+              class:opacity-40={$theme !== 'light'}
+            >
               <SunIcon />
             </div>
           </button>
           <button
             class="rounded-full dark:bg-[#565656] bg-black dark:bg-opacity-50 w-25 h-25 flex items-center justify-center p-0 border-0"
-            class:text-white={enabled}
-            class:bg-opacity-50={enabled}
-            class:bg-opacity-10={!enabled}
-            class:dark:text-black={enabled}
-            class:dark:bg-white={enabled}
-            on:click={toggleEnabled}
+            class:text-white={$theme === 'dark'}
+            class:bg-opacity-50={$theme === 'dark'}
+            class:bg-opacity-10={$theme !== 'dark'}
+            class:dark:text-black={$theme === 'dark'}
+            class:dark:bg-white={$theme === 'dark'}
+            on:click={() => theme.set('dark')}
           >
-            <div class:opacity-100={enabled} class:opacity-40={!enabled}>
+            <div
+              class:opacity-100={$theme === 'dark'}
+              class:opacity-40={$theme !== 'dark'}
+            >
               <MoonIcon />
             </div>
           </button>
           <button
             class="rounded-full dark:bg-[#565656] bg-black dark:bg-opacity-50 w-25 h-25 flex items-center justify-center p-0 border-0"
-            class:text-white={enabled}
-            class:bg-opacity-50={enabled}
-            class:bg-opacity-10={!enabled}
-            class:dark:text-black={enabled}
-            class:dark:bg-white={enabled}
-            on:click={toggleEnabled}
+            class:text-white={$theme === 'auto'}
+            class:bg-opacity-50={$theme === 'auto'}
+            class:bg-opacity-10={$theme !== 'auto'}
+            class:dark:text-black={$theme === 'auto'}
+            class:dark:bg-white={$theme === 'auto'}
+            on:click={() => theme.set('auto')}
           >
             <span
-              class:opacity-100={enabled}
-              class:opacity-40={!enabled}
+              class:opacity-100={$theme === 'auto'}
+              class:opacity-40={$theme !== 'auto'}
               class="font-semibold">Auto</span
             >
           </button>

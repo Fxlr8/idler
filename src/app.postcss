@@ -9,7 +9,6 @@
   font-size: 14px;
 
   color-scheme: light dark;
-  @apply text-black dark:text-white;
   background-color: #242424;
 
   font-synthesis: none;
@@ -36,10 +35,11 @@ a:hover {
 body {
   min-width: 320px;
   min-height: 100vh;
+  @apply text-black dark:text-white;
   /* Disable zooming on double tap */
   touch-action: manipulation;
 
-  @apply bg-[#EAE2DA] dark:bg-[#333540];
+  @apply bg-[#EAE2DA] dark:bg-[#333540] transition-all duration-700;
 }
 
 #app {
